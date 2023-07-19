@@ -1,0 +1,72 @@
+---
+import { languages } from '../data/languages';
+import Layout from '../layouts/Layout.astro';
+const { lang } = Astro.params;
+
+function capitalize(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+if (!lang) {
+  return;
+}
+
+let selectedLang = languages.find((l) => l.name.toLocaleLowerCase() === lang);
+
+if (!selectedLang) {
+  selectedLang = languages[0];
+}
+---
+
+<Layout title={`${capitalize(lang)}`}>
+  <article
+    class="bg-neutral-950 max-w-lg h-screen w-full p-4 mx-auto"
+    style={`view-transition-name: lang-card-${selectedLang.name}`}
+  >
+    <a href={selectedLang.name.toLocaleLowerCase()}>
+      <header class="flex items-center justify-center gap-2 p-2 relative">
+        <a href="/">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-8 h-8 absolute top-2 left-2 fill-white stroke-white"
+            width="100"
+            height="100"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#000000"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M5 12l14 0"></path>
+            <path d="M5 12l6 6"></path>
+            <path d="M5 12l6 -6"></path>
+          </svg>
+        </a>
+
+        <img
+          class="rounded-full w-10 h-10"
+          src={selectedLang.image}
+          alt={selectedLang.name}
+          style={`view-transition-name: lang-header-img-${selectedLang.name}`}
+        />
+        <h2 class="font-medium text-base text-white">{selectedLang.name}</h2>
+      </header>
+      <h1 class="text-white text-center text-4xl mt-8 italic">
+        #{selectedLang.name}
+      </h1>
+      <p
+        class="text-neutral-400 mt-2 text-center text-base max-w-md mx-auto p-4"
+      >
+        {selectedLang.description}
+      </p>
+      <img
+        class="mt-8 mb-8 rounded-2xl mx-auto"
+        src={selectedLang.image}
+        alt={selectedLang.name}
+        style={`view-transition-name: lang-img-${selectedLang.name}`}
+      />{' '}
+    </a>
+  </article>
+</Layout>
