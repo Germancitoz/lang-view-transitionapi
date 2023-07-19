@@ -52,7 +52,6 @@ const { title } = Astro.props;
 
         document.startViewTransition(() => {
           document.body.innerHTML = bodyContent.trim();
-          console.log('scroll', scroll);
           document.documentElement.scrollTop = scroll;
         });
       },
