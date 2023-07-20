@@ -1,0 +1,22 @@
+---
+import type { Uses } from '../data/languages';
+import Label from './Label.astro';
+
+interface Props {
+  labels: Uses[];
+  style?: string;
+}
+
+const { labels, style } = Astro.props;
+---
+
+<aside
+  style={style}
+  class="flex gap-3 max-w-md mx-auto justify-center overflow-x-auto mt-4"
+>
+  {
+    labels.map((label) => {
+      return <Label text={label} />;
+    })
+  }
+</aside>

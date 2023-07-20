@@ -1,16 +1,15 @@
 ---
+import LabelsContainer from '../components/LabelsContainer.astro';
 import { languages } from '../data/languages';
 import Layout from '../layouts/Layout.astro';
 
-
 export function getStaticPaths() {
-  return  languages.map((lang) => ({ params: { lang: lang.name.toLocaleLowerCase() } }));
+  return languages.map((lang) => ({
+    params: { lang: lang.name.toLocaleLowerCase() },
+  }));
 }
 
-
-
 const lang = Astro.params.lang;
-
 
 function capitalize(text: string) {
   return text.charAt(0).toUpperCase() + text.slice(1);
@@ -38,6 +37,7 @@ if (!selectedLang) {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-8 h-8 absolute top-2 left-2 fill-white stroke-white"
+            style={`view-transition-name: lang-header-svg-${selectedLang.name}`}
             width="100"
             height="100"
             viewBox="0 0 24 24"
@@ -62,9 +62,16 @@ if (!selectedLang) {
         />
         <h2 class="font-medium text-base text-white">{selectedLang.name}</h2>
       </header>
-      <h1 class="text-white text-center text-4xl mt-8 italic">
+      <h1
+        style={`view-transition-name: lang-card-title-${selectedLang.name}`}
+        class="text-white text-center text-4xl mt-8 italic"
+      >
         #{selectedLang.name}
       </h1>
+      <LabelsContainer
+        style={`view-transition-name: lang-header-labels-${selectedLang.name}`}
+        labels={selectedLang.use_for}
+      />
       <p
         class="text-neutral-400 mt-2 text-center text-base max-w-md mx-auto p-4"
       >

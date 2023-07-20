@@ -1,4 +1,4 @@
-type Uses =
+export type Uses =
   | 'frontend'
   | 'backend'
   | 'database'
@@ -20,15 +20,7 @@ export const languages: Language[] = [
     name: 'JavaScript',
     description:
       'JavaScript is a programming language that adds interactivity to your website. This happens in games, in the behavior of responses when buttons are pressed or with data entry on forms; with dynamic styling; with animation, etc. This article helps you get started with this exciting language and gives you an idea of what is possible.',
-    use_for: [
-      'frontend',
-      'backend',
-      'database',
-      'mobile',
-      'desktop',
-      'game',
-      'other',
-    ],
+    use_for: ['frontend', 'backend', 'database'],
     image: 'https://cdn.svgporn.com/logos/javascript.svg',
     color: '#f7df1e',
   },

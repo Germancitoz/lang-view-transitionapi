@@ -1,5 +1,6 @@
 ---
 import type { Language } from '../data/languages';
+import LabelsContainer from './LabelsContainer.astro';
 interface Props {
   lang: Language;
 }
@@ -8,11 +9,11 @@ const { lang } = Astro.props;
 ---
 
 <li
-  class="bg-neutral-950 max-w-lg w-full p-4 rounded-3xl hover:scale-[96%] hover:shadow-2xl transitionc"
+  class="bg-neutral-950 max-w-lg w-full p-4 rounded-3xl hover:scale-[96%] hover:shadow-2xl transitionc group"
   style={`view-transition-name: lang-card-${lang.name}`}
 >
   <a href={lang.name.toLocaleLowerCase()}>
-    <header class="flex items-center gap-2 p-2">
+    <header class="flex items-center gap-2 p-2 relative">
       <img
         class="rounded-full w-10 h-10"
         src={lang.image}
@@ -20,8 +21,35 @@ const { lang } = Astro.props;
         style={`view-transition-name: lang-header-img-${lang.name}`}
       />
       <h2 class="font-medium text-base text-white">{lang.name}</h2>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        style={`view-transition-name: lang-header-svg-${lang.name}`}
+        class="w-8 h-8 absolute top-1 right-2 fill-white transition-all stroke-white group-hover:opacity-100 opacity-0"
+        width="100"
+        height="100"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="#000000"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M5 12l14 0"></path>
+        <path d="M5 12l6 6"></path>
+        <path d="M5 12l6 -6"></path>
+      </svg>
     </header>
-    <p class="text-white mt-2 text-center text-3xl">{lang.name}</p>
+    <p
+      class="text-white mt-2 text-center text-3xl"
+      style={`view-transition-name: lang-card-title-${lang.name}`}
+    >
+      {lang.name}
+    </p>
+    <LabelsContainer
+      labels={lang.use_for}
+      style={`view-transition-name: lang-header-labels-${lang.name}`}
+    />
     <img
       class="mt-8 mb-8 rounded-2xl mx-auto"
       src={lang.image}
